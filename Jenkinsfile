@@ -15,12 +15,13 @@ pipeline{
                 echo 'This is stage 2'
                 sh 'mvn test'
             }
+        }
         stage('Package'){
             steps{
                 echo 'This is stage 3'
                 sh 'mvn package'
             }
         }
-        }
+        
     }
 }
