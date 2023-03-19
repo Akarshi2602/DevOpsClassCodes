@@ -1,49 +1,26 @@
-
-pipeline {
+pipeline{
     agent any
     tools{
-        maven 'mymaven'
+        maven 'maven'
     }
-
-    stages {
-        stage('cloningRepo') {
-            steps {
-                echo 'This is stage 1'
-                git 'https://github.com/NikitasGithub/DevOpsClassCodes.git'
+    stages{
+        stage('CloningRepo'){
+            steps{
+                echo 'This is satge 1'
+                git 'https://github.com/Akarshi2602/DevOpsClassCodes.git'
             }
         }
-        stage('Compile') {
-            steps {
+        stage('Test'){
+            steps{
                 echo 'This is stage 2'
-                sh 'mvn compile'
-            }
-        }
-        
-        stage('Code Review') {
-            steps {
-                echo 'This is stage 3'
-                sh 'mvn pmd:pmd'
-            }
-            post{
-                success{
-                    recordIssues(tools: [pmdParser(pattern: '**/pmd.xml')])
-                }
-            }
-        }
-        
-        stage('Test') {
-            steps {
-                echo 'This is stage 4'
                 sh 'mvn test'
             }
-        }
-        
-        stage('packaging my code') {
-            steps {
-                echo 'This is stage 5'
+        stage('Package'){
+            steps{
+                echo 'This is stage 3'
                 sh 'mvn package'
             }
-        } 
-        
+        }
+        }
     }
 }
